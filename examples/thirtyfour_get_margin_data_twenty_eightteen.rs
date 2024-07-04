@@ -506,6 +506,9 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     // caps.add_chrome_arg("--no-sandbox")?;
     //  caps.add_chrome_arg("--disable-dev-shm-usage")?;
 
+    _caps.add_arg("--remote-debugging-pipe")?;
+    _caps.add_arg("--no-sandbox")?;
+    
     let driver_result = WebDriver::new("http://localhost:9515", _caps).await;
 
     // let result = WebDriver::new("http://localhost:4444/wd/hub", &caps).await;
