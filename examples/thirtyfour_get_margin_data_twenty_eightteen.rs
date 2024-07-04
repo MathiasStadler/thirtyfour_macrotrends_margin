@@ -26,6 +26,8 @@ use std::thread;
 use std::time::Duration;
 
 use thirtyfour::{prelude::WebDriverError, By, DesiredCapabilities, Key, WebDriver, WebElement};
+use thirtyfour::ChromiumLikeCapabilities;
+
 
 // const DEBUG_VEC: bool = false;
 // const SHOW_REAL_HTML:bool = false;
@@ -499,7 +501,7 @@ async fn save_table_to_file_worker(
 async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     info!("initialize_driver - start");
 
-    let _caps = DesiredCapabilities::chrome();
+    let mut _caps = DesiredCapabilities::chrome();
 
     // let mut caps: thirtyfour::ChromeCapabilities = DesiredCapabilities::chrome();
     // caps.add_chrome_arg("--headless")?;
