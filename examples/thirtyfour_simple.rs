@@ -83,27 +83,10 @@ async fn run() -> color_eyre::Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-#[allow(dead_code)]
 async fn close_browser(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
     // Always explicitly close the browser.
     _driver.quit().await?;
 
-    Ok(())
-}
-
-#[allow(dead_code)]
-async fn screenshot_browser(driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
-    // FROM HERE  screenshot of browser windows
-    // https://stackoverflow.com/questions/60999624/trying-to-take-and-save-a-screenshot-of-a-specific-element-selenium-python-ch
-
-    let _screenshot = driver.screenshot_as_png().await?;
-
-    // FROM HERE  write to file
-    // https://doc.rust-lang.org/std/fs/struct.File.html
-    let mut _file = File::create("screenshot.png")?;
-    _file.write_all(&_screenshot)?;
-
-    // println!("Screenshot of browser windows => {:?} ",screenshot);
     Ok(())
 }
 
@@ -125,24 +108,9 @@ async fn wait_seconds_of_browser(
 // sec data
 // https://www.sec.gov/cgi-bin/viewer?action=view&cik=1069878&accession_number=0001193125-23-266276&xbrl_type=v#
 
-#[allow(dead_code)]
-const TABS_OF_DATA: &[&[&str]] = &[
-    //No.,FieldName,site xpath,table xpath
-    &[
-        "t1",
-        "prices",
-        "/html/body/div[3]/div[3]/div[1]/div[9]/table",
-    ],
-    &["t2", "financial", ""],
-    &[
-        "t3",
-        "revenue",
-        "/html/body/div[3]/div[3]/div[1]/div[8]/div[1]/table",
-    ],
-];
-
 // FOUND HERE
 // https://itehax.com/blog/web-scraping-using-rust
+
 async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     info!("initialize_driver - start");
 
@@ -174,39 +142,6 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
 #[allow(dead_code)]
 fn print_type<T>(_: &T) {
     debug!("Type is => {}", std::any::type_name::<T>());
-}
-
-#[allow(dead_code)]
-async fn tag_list_all_childes(
-    _driver: WebDriver,
-    #[allow(unused_variables)] xpath: &str,
-) -> Result<(), Box<dyn Error>> {
-    debug!("driver => {:?}", _driver.status().await?);
-
-    let child_elems = _driver
-        //.find_all(By::XPath("/*/*/X/node()"))
-        .find_all(By::XPath("*"))
-        .await?;
-
-    for child_elem in child_elems {
-        // extract string out of result
-        let _tag_name = match child_elem.tag_name().await {
-            Ok(x) => x,
-            Err(_e) => continue,
-        };
-        debug!("\tlist_iframe_tag => tag_name =>  {}", _tag_name);
-
-        let _result_tag_class_name: WebDriverResult<Option<String>> = child_elem.class_name().await;
-        let _tag_class_name = match _result_tag_class_name {
-            Ok(tag_class_name) => tag_class_name,
-            Err(_e) => continue,
-        };
-        debug!("_tag_class_name => {:?}", _tag_class_name);
-    }
-
-    // debug!("\t go back to call fn ");
-
-    Ok(())
 }
 
 /*
