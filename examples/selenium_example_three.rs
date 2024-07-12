@@ -12,22 +12,25 @@
 use log::{debug, error, info, log_enabled, Level};
 
 // use csv::WriterBuilder;
-// use std::error::Error;
+// for Box<dyn Error>
+use std::error::Error;
 // use std::fs::File;
 use std::io::Write;
 // use std::process;
 
-// use std::thread;
+// for wait of browser
+use std::thread;
 // use std::time::Duration;
-
+use tokio::time::Duration;
 
 use std::env::set_var;
 use thirtyfour::prelude::*;
 
 #[tokio::main]
 async fn main() -> color_eyre::Result<()> {
-
     set_var("RUST_LOG", "debug");
+
+    pub type WebDriverResult<T> = Result<T, WebDriverError>;
 
     env_logger::builder()
         .format(|buf, record| {
@@ -48,8 +51,8 @@ async fn main() -> color_eyre::Result<()> {
         })
         .init();
 
-        error!("RUST_LOG maybe NOT enable");
-        error!("Used: => RUST_LOG=info < prg >");
+    error!("RUST_LOG maybe NOT enable");
+    error!("Used: => RUST_LOG=info < prg >");
 
     // The use of color_eyre gives much nicer error reports, including making
     // it much easier to locate where the error occurred.
@@ -62,7 +65,10 @@ async fn main() -> color_eyre::Result<()> {
     let _driver = initialize_driver().await?;
 
     // Navigate to https://wikipedia.org.
-    _driver.goto("https://wikipedia.org").await?;
+
+    //_driver.goto("https://wikipedia.org").await?;
+    let _driver = goto_web_page(_driver, "https://wikipedia.org").await?;
+
     let elem_form = _driver.find(By::Id("search-form")).await?;
 
     // Find element from element.
@@ -79,8 +85,10 @@ async fn main() -> color_eyre::Result<()> {
     _driver.find(By::ClassName("firstHeading")).await?;
     assert_eq!(_driver.title().await?, "Selenium - Wikipedia");
 
+    // wait_seconds_of_browser(_driver,5).await?;
     // Always explicitly close the browser. There are no async destructors.
-    _driver.quit().await?;
+    // _driver.quit().await?;
+    // borowser_quit(_driver).await?;
 
     Ok(())
 }
@@ -97,7 +105,7 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
 
     _caps.add_arg("--remote-debugging-pipe")?;
     _caps.add_arg("--no-sandbox")?;
-    
+
     let driver_result = WebDriver::new("http://localhost:9515", _caps).await;
 
     // let result = WebDriver::new("http://localhost:4444/wd/hub", &caps).await;
@@ -111,7 +119,41 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     Ok(driver)
 }
 
+// https://github.com/stevepryde/thirtyfour/issues/4?ref=https://githubhelp.com
+//
+async fn wait_seconds_of_browser(
+    _driver: WebDriver,
+    waiting_period: u64,
+) -> color_eyre::Result<(), Box<dyn Error>> {
+    debug!("wait for page completed load => wait for status from chrome driver");
+    debug!("driver=> {:?}", _driver.status().await?);
+    debug!("Thread sleep for {} seconds", waiting_period);
+    thread::sleep(Duration::from_secs(waiting_period));
+    Ok(())
+}
 
-// cargo build --example selenium_example
+async fn goto_web_page(driver: WebDriver, web_page: &str) -> Result<WebDriver, WebDriverError> {
+    info!("start - goto_web_page");
+    driver.goto(web_page).await?;
 
-// cargo run --example selenium_example
+    info!("finished - got_web_page");
+    Ok(driver)
+}
+
+
+async fn browser_quit<T>(driver:WebDriver)-> Result<WebDriver, WebDriverError> {
+
+    info!("start - browser_quit");
+    let driver_result:Result<(), WebDriverError> = driver.quit().await;
+
+    let driver = match driver_result {
+        Ok(value) => value,
+        Err(error) => return Err(error),
+    };
+
+    info!("finished - browser_quit");
+    Ok(driver )
+}
+// cargo build --example selenium_example_three
+
+// cargo run --example selenium_example_three
