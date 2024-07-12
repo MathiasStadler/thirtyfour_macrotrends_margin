@@ -85,10 +85,11 @@ async fn main() -> color_eyre::Result<()> {
     _driver.find(By::ClassName("firstHeading")).await?;
     assert_eq!(_driver.title().await?, "Selenium - Wikipedia");
 
-    // wait_seconds_of_browser(_driver,5).await?;
+    // wait_seconds_of_browser(_driver.clone(), 10).await?;
+    
     // Always explicitly close the browser. There are no async destructors.
     // _driver.quit().await?;
-    // borowser_quit(_driver).await?;
+    // borowser_quit(_driver.clone()).await?;
 
     Ok(())
 }
@@ -141,7 +142,7 @@ async fn goto_web_page(driver: WebDriver, web_page: &str) -> Result<WebDriver, W
 }
 
 
-async fn browser_quit<T>(driver:WebDriver)-> Result<WebDriver, WebDriverError> {
+async fn browser_quit(driver:WebDriver)-> Result<WebDriver, WebDriverError> {
 
     info!("start - browser_quit");
     let driver_result:Result<(), WebDriverError> = driver.quit().await;

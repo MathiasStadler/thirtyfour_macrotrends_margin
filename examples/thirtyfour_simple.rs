@@ -565,7 +565,7 @@ async fn tag_list_all_childes(
 }
 
 /*
-rustfmt  ./examples/tokio_finviz_method_five.rs
+rustfmt  ./examples/thirtyfour_simple
 
-cargo build --example thirtyfour_get_margin_data_twenty_eightteen
+cargo build --example thirtyfour_simple
 */

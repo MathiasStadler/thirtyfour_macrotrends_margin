@@ -27,8 +27,12 @@ use std::env::set_var;
 use thirtyfour::prelude::*;
 
 #[tokio::main]
-async fn main() -> color_eyre::Result<()> {
+fn main() -> color_eyre::Result<(), Box<dyn Error>> {
+    color_eyre::install()?;
     set_var("RUST_LOG", "debug");
+
+
+    let mut _call_counter: i32;
 
     env_logger::builder()
         .format(|buf, record| {
@@ -48,6 +52,24 @@ async fn main() -> color_eyre::Result<()> {
             )
         })
         .init();
+
+    error!("RUST_LOG maybe NOT enable");
+    error!("Used: => RUST_LOG=info < prg >");
+
+    let rt: tokio::runtime::Runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()?;
+    let _ = rt.block_on(run());
+
+    info!("env_logger: ended");
+    process::exit(0);
+}
+
+
+
+async fn run() -> color_eyre::Result<()> {
+    
+    
 
     error!("RUST_LOG maybe NOT enable");
     error!("Used: => RUST_LOG=info < prg >");
@@ -80,12 +102,15 @@ async fn main() -> color_eyre::Result<()> {
     _driver.find(By::ClassName("firstHeading")).await?;
     assert_eq!(_driver.title().await?, "Selenium - Wikipedia");
 
-    // wait_seconds_of_browser(_driver,5).await?;
+    wait_seconds_of_browser(_driver.clone(), 10).await?;
     // Always explicitly close the browser. There are no async destructors.
     _driver.quit().await?;
 
     Ok(())
+    
 }
+
+
 
 async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     info!("initialize_driver - start");
@@ -126,6 +151,6 @@ async fn wait_seconds_of_browser(
     Ok(())
 }
 
-// cargo build --example selenium_example
+// cargo build --example selenium_example_two
 
-// cargo run --example selenium_example
+// cargo run --example selenium_example_two
