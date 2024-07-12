@@ -458,7 +458,11 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
                                                 _sub_tag_name,
                                                 _search_child_elem.tag_name().await?
                                             );
-                                            search_child_elems(_search_child_elem,_sub_tag_name.clone()).await?;
+                                            search_child_elems(
+                                                _search_child_elem,
+                                                _sub_tag_name.clone(),
+                                            )
+                                            .await?;
                                         }
                                     }
                                 }
@@ -778,9 +782,10 @@ async fn debug_vec(
 }
 
 #[allow(dead_code)]
-async fn search_child_elems(_element:thirtyfour::WebElement , _sub_tag_name:String) 
--> color_eyre::Result<Vec<thirtyfour::WebElement>> {
-
+async fn search_child_elems(
+    _element: thirtyfour::WebElement,
+    _sub_tag_name: String,
+) -> color_eyre::Result<Vec<thirtyfour::WebElement>> {
     let _child_elems = match _element.find_all(By::XPath(".//child::*[//*]")).await {
         Ok(x) => x,
         Err(_e) => {
@@ -788,18 +793,15 @@ async fn search_child_elems(_element:thirtyfour::WebElement , _sub_tag_name:Stri
             // continue;
             //Err(_e)
             //_e
-        },
+        }
     };
 
     if _child_elems.len() > 0 {
-         // debug_vec(_child_elems,_sub_tag_name);
+        // debug_vec(_child_elems,_sub_tag_name);
         debug_vec(_child_elems.clone(), _sub_tag_name.clone());
-            //.await?;
-    }
-    else{
-
+        //.await?;
+    } else {
         debug!("NO child elements found");
-
     };
 
     Ok(_child_elems)

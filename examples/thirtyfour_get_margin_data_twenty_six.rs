@@ -697,8 +697,6 @@ async fn tag_list_all_childes(
         debug!("_tag_class_name => {:?}", _tag_class_name);
     }
 
-    
-
     // ./thirtyfour_get_margin_data_eighteen.rs:318:
     // let child_elems = _driver.find_all(By::XPath("./child::*")).await?;
     // let mut child_elems = _driver.find_all(By::XPath(".//child::div/span")).await?;
@@ -730,17 +728,17 @@ async fn tag_list_all_childes(
     // debug!("source of iframe => {:?}", _driver.page_source().await?);
     // debug!("source of iframe => {:?}", _driver.source().await?);
 
-                                                           //id="dismiss-button"
+    //id="dismiss-button"
     let _child_elem = match _driver.find(By::Id("dismiss-button")).await {
         Ok(element) => {
             debug!("FOUND div dismiss-button");
             element
-        },
+        }
         Err(_e) => {
             debug!("web element not found {}", _e);
             error!("Failed enter frame!");
             panic!("Failed enter frame");
-        },
+        }
     };
 
     // get tag name

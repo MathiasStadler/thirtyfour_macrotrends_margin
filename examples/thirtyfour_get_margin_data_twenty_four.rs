@@ -528,37 +528,36 @@ async fn tag_list_all_childes(
     _driver: WebDriver,
     xpath: &str,
 ) -> color_eyre::Result<(), Box<dyn Error>> {
-    
-    
     debug!("tag_list_all_childes : list_iframe_tag");
-    debug!("tag_list_all_childes ; Status driver => {:?}", _driver.status().await?);
+    debug!(
+        "tag_list_all_childes ; Status driver => {:?}",
+        _driver.status().await?
+    );
     debug!("tag_list_all_childes : xPath NOT USED=> {:?}", xpath);
     // let child_elems = _driver.find_all(By::XPath(".//*")).await?;
 
     let child_elems = _driver.find_all(By::XPath(".//child::*[//*]")).await?;
-    
+
     for child_elem in child_elems {
-    
         // extract string out of result
         let _tag_name = match child_elem.tag_name().await {
             Ok(x) => x,
             Err(_e) => continue,
         };
         debug!("\tlist_iframe_tag => tag_name =>  {}", _tag_name);
-       
+
         let _result_tag_class_name: WebDriverResult<Option<String>> = child_elem.class_name().await;
         let _tag_class_name = match _result_tag_class_name {
             Ok(tag_class_name) => tag_class_name,
             Err(_e) => continue,
         };
         debug!("_tag_class_name => {:?}", _tag_class_name);
-       
     }
-    
-    // ./thirtyfour_get_margin_data_eighteen.rs:318:       
+
+    // ./thirtyfour_get_margin_data_eighteen.rs:318:
     // let child_elems = _driver.find_all(By::XPath("./child::*")).await?;
     // let mut child_elems = _driver.find_all(By::XPath(".//child::div/span")).await?;
-    
+
     // for child_elem in child_elems {
     //     // extract string out of result
     //     let _tag_name = match child_elem.tag_name().await {
@@ -567,14 +566,13 @@ async fn tag_list_all_childes(
     //     };
     //     child_elem.click().await?;
     //     debug!("\tlist_iframe_tag => div =>  {}", _tag_name);
-        
+
     // }
 
-
     // debug!("close ");
-    
+
     // child_elems = _driver.find_all(By::Id("dismiss-button")).await?;
-    
+
     // for child_elem in child_elems {
     //     // extract string out of result
     //     let _tag_name = match child_elem.tag_name().await {
@@ -583,40 +581,34 @@ async fn tag_list_all_childes(
     //     };
     //     debug!("\tlist_iframe_tag => span=>  {}", _tag_name);
     // }
-   
-    
-    debug!("source of iframe => {:?}",_driver.page_source().await?);
 
+    debug!("source of iframe => {:?}", _driver.page_source().await?);
 
-// FROM HERE
-// https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html    
-//  sed -i 's/>/>\r\n/g' test.txt 
+    // FROM HERE
+    // https://www.ee.ucl.ac.uk/~mflanaga/java/HTMLandASCIItableC1.html
+    //  sed -i 's/>/>\r\n/g' test.txt
 
-// \x3d  => =
+    // \x3d  => =
 
-// sed -i 's/\\x22/"/g' test.txt
-// //single quote
-// sed -i 's/\\x27/0x/g' test.txt
-// sed -i 's/\\x3e/</g' test.txt
-// sed -i 's/\\x3c/>/g' test.txt
-// sed -i 's/\\x3d/=/g' test.txt
-// sed -i 's/\\x3db/*/g' test.txt
-// sed -i 's/\\x26/&/g' test.txt
+    // sed -i 's/\\x22/"/g' test.txt
+    // //single quote
+    // sed -i 's/\\x27/0x/g' test.txt
+    // sed -i 's/\\x3e/</g' test.txt
+    // sed -i 's/\\x3c/>/g' test.txt
+    // sed -i 's/\\x3d/=/g' test.txt
+    // sed -i 's/\\x3db/*/g' test.txt
+    // sed -i 's/\\x26/&/g' test.txt
 
+    // sed -i  's/</\r\n\n</g' test.txt
+    // sed -i 's/</\r\n</g' test.txt
+    // sed -i 's/<div/\r\n<div/g'  test.txt
 
+    // sed -i  's/\\/ /g' ./output_html.html
+    // xmllint --xpath "//html" ./output_html.html
 
-// sed -i  's/</\r\n\n</g' test.txt
-// sed -i 's/</\r\n</g' test.txt
-// sed -i 's/<div/\r\n<div/g'  test.txt
+    // sed "s/;/;\n/g" iframe_soucre.js> foo_Out.txt
 
-// sed -i  's/\\/ /g' ./output_html.html
-// xmllint --xpath "//html" ./output_html.html
-
-// sed "s/;/;\n/g" iframe_soucre.js> foo_Out.txt
-
-// https://tpc.googlesyndication.com/simgad/13754874180434852044/14763004658117789537?w\=300\\x26h\=300\\x26tw\=1\\x26q\=75)
-
-
+    // https://tpc.googlesyndication.com/simgad/13754874180434852044/14763004658117789537?w\=300\\x26h\=300\\x26tw\=1\\x26q\=75)
 
     debug!("\t go back to call fn ");
     debug!("\t go back to call fn ");

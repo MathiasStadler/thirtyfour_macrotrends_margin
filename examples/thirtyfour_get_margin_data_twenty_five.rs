@@ -399,9 +399,9 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
 
                                 //FROM HERE
                                 //https://stackoverflow.com/questions/25356440/need-to-dump-entire-dom-tree-with-element-id-from-selenium-server
-                                let elements =
-                                    child_elem.find_all(By::Id( "//*[@id='dismiss-button']")).await?;
-                                   
+                                let elements = child_elem
+                                    .find_all(By::Id("//*[@id='dismiss-button']"))
+                                    .await?;
 
                                 for _element in elements {
                                     debug!("dismiss button");
@@ -409,7 +409,6 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
 
                                 //HERE WEITER
                                 // RUST_LOG=debug cargo run --example thirtyfour_get_margin_data_twenty_five 2>&1 | tee output7.txt
-
 
                                 // extract text inside span
                                 let _tag_text = match child_elem.text().await {

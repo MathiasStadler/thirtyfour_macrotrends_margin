@@ -454,8 +454,12 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
                                         if _child_elems.len() > 0 {
                                             // debug_vec(_child_elems,_sub_tag_name);
                                             debug!("call debug_vec ");
-                                            debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"child_elems")
-                                                .await?;
+                                            debug_vec(
+                                                _child_elems.clone(),
+                                                _sub_tag_name.clone(),
+                                                "child_elems",
+                                            )
+                                            .await?;
                                         };
 
                                         const XPATH_SEARCH: &str = ".//child::*[//*]";
@@ -746,14 +750,12 @@ async fn tag_list_all_childes(
     Ok(())
 }
 
-
 #[async_recursion]
 async fn debug_vec(
     _child_elems: Vec<WebElement>,
     _sub_tag_name: String,
-    _note:&str,
+    _note: &str,
 ) -> color_eyre::Result<(), Box<dyn Error>> {
-    
     debug!("START debug_vec");
 
     for _child_elem in _child_elems {
@@ -766,14 +768,18 @@ async fn debug_vec(
             _child_elem.id().await?,
             _child_elem.text().await?,
         );
-       // let _child_elems= _child_elem.find_all(By::XPath(".//*")).await?;
-        let _child_elems= _child_elem.find_all(By::XPath("./*")).await?;
-        
-        if _child_elems.len() > 0{
-            debug!("child elems tag {} n=>{}",_sub_tag_name,_child_elems.len());
+        // let _child_elems= _child_elem.find_all(By::XPath(".//*")).await?;
+        let _child_elems = _child_elem.find_all(By::XPath("./*")).await?;
 
-          //  debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"sub_child_elems")
-          //  .await?;
+        if _child_elems.len() > 0 {
+            debug!(
+                "child elems tag {} n=>{}",
+                _sub_tag_name,
+                _child_elems.len()
+            );
+
+            //  debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"sub_child_elems")
+            //  .await?;
         };
     }
 
@@ -844,8 +850,7 @@ async fn list_element(child_elem: WebElement) -> color_eyre::Result<(), Box<dyn 
                 debug!("call debug_vec ");
                 // debug_vec(_child_elems,_sub_tag_name);
                 // debug_vec(_child_elems.clone(), _sub_tag_name.clone()).await?;
-                debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"child_elems")
-                                                .await?;
+                debug_vec(_child_elems.clone(), _sub_tag_name.clone(), "child_elems").await?;
             };
 
             const XPATH_SEARCH: &str = ".//child::*[//*]";
@@ -871,12 +876,14 @@ async fn list_element(child_elem: WebElement) -> color_eyre::Result<(), Box<dyn 
             */
 
             debug!("call debug_vec ");
-                // debug_vec(_child_elems,_sub_tag_name);
-                // debug_vec(_search_child_elems.clone(), _sub_tag_name.clone()).await?;
-                debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"call debug_vec")
-                                                .await?;
-
-
+            // debug_vec(_child_elems,_sub_tag_name);
+            // debug_vec(_search_child_elems.clone(), _sub_tag_name.clone()).await?;
+            debug_vec(
+                _child_elems.clone(),
+                _sub_tag_name.clone(),
+                "call debug_vec",
+            )
+            .await?;
         }
     } //end div
     Ok(())

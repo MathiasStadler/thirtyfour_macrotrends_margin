@@ -557,13 +557,10 @@ async fn tag_list_all_childes(
         };
         debug!("_tag_class_name => {:?}", _tag_class_name);
 
-
         // debug!(
         //     " child_elem list of attribute {}",
         //     child_elem.inner_html().await?
         // );
-
-
 
         // debug!("_option_class_name => {}",_option_class_name);
 
@@ -600,7 +597,7 @@ async fn tag_list_all_childes(
 
     // get only all div
     // //div[@class="measure-tab" and .//span[contains(., "someText")]]
-    // ./thirtyfour_get_margin_data_eighteen.rs:318:       
+    // ./thirtyfour_get_margin_data_eighteen.rs:318:
     // let child_elems = _driver.find_all(By::XPath("./child::*")).await?;
     let mut child_elems = _driver.find_all(By::XPath(".//child::div/span")).await?;
     //let child_elems = _driver.find_all(By::XPath(".//span[contains(., "Close")]")).await?;
@@ -613,9 +610,7 @@ async fn tag_list_all_childes(
         };
         child_elem.click().await?;
         debug!("\tlist_iframe_tag => div =>  {}", _tag_name);
-        
     }
-
 
     debug!("close ");
     // get only all div
@@ -632,15 +627,14 @@ async fn tag_list_all_childes(
             Err(_e) => continue,
         };
         debug!("\tlist_iframe_tag => span=>  {}", _tag_name);
-        
     }
 
     // get only all div
     // //div[@class="measure-tab" and .//span[contains(., "someText")]]
-    
+
     // working
     // child_elems = _driver.find_all(By::XPath(".//span")).await?;
-    
+
     //child_elems = _driver.find_all(By::XPath(".//span[contains(., "Close")]")).await?;
     // child_elems = _driver.find_all(By::XPath("//span[text()='Close']")).await?;
     //div[contains(text(), 'apify')]
@@ -655,7 +649,7 @@ async fn tag_list_all_childes(
     //         Err(_e) => continue,
     //     };
     //     debug!("\tlist_iframe_tag => span=> text()='Close'  {}", _tag_name);
-        
+
     // }
 
     debug!("\t go back to call fn ");

@@ -401,11 +401,16 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
                                         debug!("\t_sub_tag_text =>  {:?}", _sub_tag_text);
                                         // extract sub web element
                                         // let elem = driver.find(By::Id("my-element-id")).await?;
-                                        let child_elems = sub_child_elem.find_all(By::XPath(".//child::*[//*]")).await?;
-                                        debug!("n = {:?} ",child_elems.len());
-                                        
+                                        let child_elems = sub_child_elem
+                                            .find_all(By::XPath(".//child::*[//*]"))
+                                            .await?;
+                                        debug!("n = {:?} ", child_elems.len());
+
                                         for child_elem in child_elems {
-                                            debug!("child_elem.tag_name {}", child_elem.tag_name().await?);
+                                            debug!(
+                                                "child_elem.tag_name {}",
+                                                child_elem.tag_name().await?
+                                            );
                                         }
                                     }
                                 }
@@ -424,7 +429,7 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
                                 // RUST_LOG=debug cargo run --example thirtyfour_get_margin_data_twenty_five 2>&1 | tee output7.txt
 
                                 let _text = child_elem.text().await?;
-                                debug!("text => {}",_text);
+                                debug!("text => {}", _text);
 
                                 // extract text inside span
                                 let _tag_text = match child_elem.text().await {

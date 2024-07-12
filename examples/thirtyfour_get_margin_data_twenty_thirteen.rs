@@ -758,8 +758,8 @@ async fn debug_vec(
             _child_elem.id().await?,
             _child_elem.text().await?,
         );
-        let _child_elems= _child_elem.find_all(By::XPath(".//*")).await?;
-        debug!("elems n=>{}",_child_elems.len());
+        let _child_elems = _child_elem.find_all(By::XPath(".//*")).await?;
+        debug!("elems n=>{}", _child_elems.len());
     }
 
     debug!("FINISHED debug_vec");
@@ -852,10 +852,8 @@ async fn list_element(child_elem: WebElement) -> color_eyre::Result<(), Box<dyn 
             }
 
             debug!("call debug_vec ");
-                // debug_vec(_child_elems,_sub_tag_name);
-                debug_vec(_search_child_elems.clone(), _sub_tag_name.clone()).await?;
-
-
+            // debug_vec(_child_elems,_sub_tag_name);
+            debug_vec(_search_child_elems.clone(), _sub_tag_name.clone()).await?;
         }
     } //end div
     Ok(())

@@ -314,9 +314,15 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
                             debug!("\tSTART tag inside iframe");
                             for child_elem in child_elems {
                                 let tag_name = child_elem.tag_name().await?;
-                                debug!("\t Call start tag inside iframe => tag_name =>  {}", tag_name);
+                                debug!(
+                                    "\t Call start tag inside iframe => tag_name =>  {}",
+                                    tag_name
+                                );
                                 let _ = list_iframe_tag(_driver.clone(), "xpath");
-                                debug!("\t Call after tag inside iframe => tag_name =>  {}", tag_name);
+                                debug!(
+                                    "\t Call after tag inside iframe => tag_name =>  {}",
+                                    tag_name
+                                );
                             }
                             debug!("\tFINISHED tag inside iframe");
 
@@ -548,13 +554,16 @@ async fn list_iframe_tag(
     for into_frame_child_elem in into_frame_child_elems {
         let _tag_name = into_frame_child_elem.tag_name().await?;
         debug!("\tlist_iframe_tag => tag_name =>  {}", _tag_name);
-        let parent_tag= into_frame_child_elem.clone().parent().await?;
-        debug!("parent tag name {:?}",parent_tag.tag_name().await?);
+        let parent_tag = into_frame_child_elem.clone().parent().await?;
+        debug!("parent tag name {:?}", parent_tag.tag_name().await?);
         debug!("\tback from frame frame => ");
 
         let _tag_class_name = into_frame_child_elem.class_name().await?;
         let _ = list_iframe_tag(_driver.clone(), "xpath");
-        debug!("\tlist_iframe_tag => tag_class_name => {:?}", _tag_class_name);
+        debug!(
+            "\tlist_iframe_tag => tag_class_name => {:?}",
+            _tag_class_name
+        );
     }
 
     Ok(())

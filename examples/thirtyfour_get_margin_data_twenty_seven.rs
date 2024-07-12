@@ -560,7 +560,6 @@ async fn save_table_to_file_worker(
     output_file_name: &str,
     table_xpath: &[&[&str]],
 ) -> color_eyre::Result<(), Box<dyn Error>> {
-    
     let mut field = 0;
 
     debug!("start - save_table_to_file_worker");
@@ -704,12 +703,8 @@ async fn tag_list_all_childes(
         debug!("_tag_class_name => {:?}", _tag_class_name);
 
         //child_elem
-     //   tag_list_all_childes(_driver.clone(),&"empty").await?
-
-
-    }// finished for child_elem in child_elems
-
-    
+        //   tag_list_all_childes(_driver.clone(),&"empty").await?
+    } // finished for child_elem in child_elems
 
     // ./thirtyfour_get_margin_data_eighteen.rs:318:
     // let child_elems = _driver.find_all(By::XPath("./child::*")).await?;
@@ -742,20 +737,20 @@ async fn tag_list_all_childes(
     // debug!("source of iframe => {:?}", _driver.page_source().await?);
     // debug!("source of iframe => {:?}", _driver.source().await?);
 
-                                                           //id="dismiss-button"
+    //id="dismiss-button"
     let _child_elem = match _driver.find(By::Id("dismiss-button")).await {
         Ok(element) => {
             debug!("FOUND div dismiss-button");
             element
-        },
+        }
         Err(_e) => {
             debug!("web element id:dismiss-button not found {}", _e);
             // error!("Failed enter frame!");
-            
+
             // panic!("Failed enter frame");
             //let _dummy_web_element:WebElement = todo!() ;
             Err(_e)
-        },
+        }
     };
 
     // get tag name

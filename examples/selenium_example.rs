@@ -20,13 +20,11 @@ use std::io::Write;
 // use std::thread;
 // use std::time::Duration;
 
-
 use std::env::set_var;
 use thirtyfour::prelude::*;
 
 #[tokio::main]
 async fn main() -> color_eyre::Result<()> {
-
     set_var("RUST_LOG", "debug");
 
     env_logger::builder()
@@ -48,8 +46,8 @@ async fn main() -> color_eyre::Result<()> {
         })
         .init();
 
-        error!("RUST_LOG maybe NOT enable");
-        error!("Used: => RUST_LOG=info < prg >");
+    error!("RUST_LOG maybe NOT enable");
+    error!("Used: => RUST_LOG=info < prg >");
 
     // The use of color_eyre gives much nicer error reports, including making
     // it much easier to locate where the error occurred.
@@ -97,7 +95,7 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
 
     _caps.add_arg("--remote-debugging-pipe")?;
     _caps.add_arg("--no-sandbox")?;
-    
+
     let driver_result = WebDriver::new("http://localhost:9515", _caps).await;
 
     // let result = WebDriver::new("http://localhost:4444/wd/hub", &caps).await;
@@ -110,7 +108,6 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     info!("initialize_driver - end");
     Ok(driver)
 }
-
 
 // cargo build --example selenium_example
 

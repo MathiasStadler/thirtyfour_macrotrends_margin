@@ -86,7 +86,7 @@ async fn main() -> color_eyre::Result<()> {
     assert_eq!(_driver.title().await?, "Selenium - Wikipedia");
 
     // wait_seconds_of_browser(_driver.clone(), 10).await?;
-    
+
     // Always explicitly close the browser. There are no async destructors.
     // _driver.quit().await?;
     // borowser_quit(_driver.clone()).await?;
@@ -141,11 +141,9 @@ async fn goto_web_page(driver: WebDriver, web_page: &str) -> Result<WebDriver, W
     Ok(driver)
 }
 
-
-async fn browser_quit(driver:WebDriver)-> Result<WebDriver, WebDriverError> {
-
+async fn browser_quit(driver: WebDriver) -> Result<WebDriver, WebDriverError> {
     info!("start - browser_quit");
-    let driver_result:Result<(), WebDriverError> = driver.quit().await;
+    let driver_result: Result<(), WebDriverError> = driver.quit().await;
 
     let driver = match driver_result {
         Ok(value) => value,
@@ -153,7 +151,7 @@ async fn browser_quit(driver:WebDriver)-> Result<WebDriver, WebDriverError> {
     };
 
     info!("finished - browser_quit");
-    Ok(driver )
+    Ok(driver)
 }
 // cargo build --example selenium_example_three
 

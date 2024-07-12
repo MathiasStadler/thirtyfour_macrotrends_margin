@@ -25,9 +25,8 @@ use std::process;
 use std::thread;
 use std::time::Duration;
 
-use thirtyfour::{prelude::WebDriverError, By, DesiredCapabilities, Key, WebDriver, WebElement};
 use thirtyfour::ChromiumLikeCapabilities;
-
+use thirtyfour::{prelude::WebDriverError, By, DesiredCapabilities, Key, WebDriver, WebElement};
 
 // const DEBUG_VEC: bool = false;
 // const SHOW_REAL_HTML:bool = false;
@@ -510,7 +509,7 @@ async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
 
     _caps.add_arg("--remote-debugging-pipe")?;
     _caps.add_arg("--no-sandbox")?;
-    
+
     let driver_result = WebDriver::new("http://localhost:9515", _caps).await;
 
     // let result = WebDriver::new("http://localhost:4444/wd/hub", &caps).await;

@@ -3,7 +3,6 @@
 
 // start cleanup
 
-
 // RUSTFLAGS=-Wunused-crate-dependencies cargo
 
 // env_logger
@@ -13,7 +12,6 @@
 // https://www.zenrows.com/blog/rust-selenium#install-selenium
 #[allow(unused_imports)]
 use log::{debug, error, info, log_enabled, Level};
-
 
 // use async_recursion::async_recursion;
 
@@ -79,8 +77,7 @@ pub type WebDriverResult<T> = Result<T, WebDriverError>;
 fn main() -> color_eyre::Result<(), Box<dyn Error>> {
     color_eyre::install()?;
 
-
-    let  mut _call_counter:i32;
+    let mut _call_counter: i32;
 
     env_logger::builder()
         .format(|buf, record| {
@@ -430,7 +427,7 @@ async fn path_to(_driver: WebDriver) -> color_eyre::Result<(), Box<dyn Error>> {
 
                             // let mut counter = 0;
                             // for child_elem in &child_elems {
-                                
+
                             //     counter = counter + 1;
                             //     // debug!("sub Tag => {}", counter);
                             //     let _ = list_element(child_elem.clone()).await?;
@@ -820,7 +817,7 @@ async fn tag_list_all_childes(
 //     _sub_tag_name: String,
 //     _note: &str,
 //     mut _call_counter:i32,
-    
+
 // ) -> color_eyre::Result<(), Box<dyn Error>> {
 //     debug!("START debug_vec {}",_sub_tag_name);
 
@@ -834,7 +831,7 @@ async fn tag_list_all_childes(
 //             _child_elem.class_name().await?,
 //             _child_elem.id().await?,
 //             _child_elem.text().await?,
-            
+
 //         );
 //         // let _child_elems= _child_elem.find_all(By::XPath(".//*")).await?;
 //         // let _child_elems = _child_elem.find_all(By::XPath("./*")).await?;
@@ -847,17 +844,15 @@ async fn tag_list_all_childes(
 //                 _child_elems.len()
 //             );
 
-
 //             _call_counter = _call_counter +1;
 //             debug!("\tdebug_vec step down");
 //             debug_vec(_child_elems.clone(), _sub_tag_name.clone(),"sub_child_elems",_call_counter).await?;
 //             debug!("\tdebug_vec step up");
 //         }
 //         else{
-            
+
 //             let _local_tag_name = _child_elem.tag_name().await?;
-            
-            
+
 //             // debug!("innerHTML => {}",_child_elem.inner_html().await?);
 //             debug!("tag_name => {}",_child_elem.tag_name().await?);
 
@@ -866,27 +861,25 @@ async fn tag_list_all_childes(
 //                 debug!("Found => {} ",_local_tag_name);
 //                 debug!("innerHTML => {} ", _child_elem.inner_html().await?);
 
-
 //             }
 //         };
 
 //         //_child_elem.id().await?,
 //         //  parent/child => children_elems => div/iframe (class_name=>None id=>Some("ad_iframe") text=>"")
-                
+
 //         // Since Rust doesn't support Nulls instead it has Optional value. Option is an Enum type which has 2 variants such as Some and None
 //         // https://dev.to/ssivakumar/options-in-rust-11pm
-        
+
 //         let _string_local_tag_id:String = _child_elem.id().await?.unwrap_or("n/a".to_string());
 
 //         debug!("Id => {}",_string_local_tag_id);
-        
+
 //         if _string_local_tag_id ==  "ad_iframe".to_string() {
 
 //             debug!("Id FOUND => {}",_string_local_tag_id);
 
 //         }
-        
-        
+
 //     }
 
 //     // debug!("FINISHED debug_vec");
@@ -993,7 +986,6 @@ async fn tag_list_all_childes(
 //                 );-> color_eyre::Result<(), Box<dyn Error>>
 //             }
 //             */
-
 //             if DEBUG_VEC {
 //                 debug!("call debug_vec ");
 //                 // debug_vec(_child_elems,_sub_tag_name);
@@ -1010,8 +1002,6 @@ async fn tag_list_all_childes(
 //     } //end div
 //     Ok(())
 // }
-
-
 
 /*
 rustfmt  ./examples/tokio_finviz_method_five.rs

@@ -31,7 +31,6 @@ fn main() -> color_eyre::Result<(), Box<dyn Error>> {
     color_eyre::install()?;
     set_var("RUST_LOG", "debug");
 
-
     let mut _call_counter: i32;
 
     env_logger::builder()
@@ -65,12 +64,7 @@ fn main() -> color_eyre::Result<(), Box<dyn Error>> {
     process::exit(0);
 }
 
-
-
 async fn run() -> color_eyre::Result<()> {
-    
-    
-
     error!("RUST_LOG maybe NOT enable");
     error!("Used: => RUST_LOG=info < prg >");
 
@@ -107,10 +101,7 @@ async fn run() -> color_eyre::Result<()> {
     _driver.quit().await?;
 
     Ok(())
-    
 }
-
-
 
 async fn initialize_driver() -> Result<WebDriver, WebDriverError> {
     info!("initialize_driver - start");
